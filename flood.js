@@ -41,7 +41,7 @@ function colorTable(colors) {
 	// create one <td> for each color, id is index of color in colors
 	for(var i = 0; i < colors.length; i++){
 		var colourCell = document.createElement("td");
-		colourCell.setAttribute("id",i);
+		colourCell.style.backgroundColor = colors[i];
 		colourTableRow.appendChild(colourCell);
 	}
 	colourTable.appendChild(colourTableRow);
@@ -237,7 +237,7 @@ $(document).ready(
 
 			// number of moves
 			var moves = 0;
-			var previousColor;
+			var previousColorIndex;
 
 			// is the game finished
 			var finish = false;
@@ -272,10 +272,39 @@ $(document).ready(
 			// color table (controls)
 			$("#color_table td").each(
 				function() {
-					// set colors for color table (controls)
-					var id = $(this).attr("id");
-					var color = colors[id];
-					$(this).css("backgroundColor",color);
+				//set what happens when a color is clicked
+				$(this).click(
+					function() {
+						var currentColor = rgb2hex($(this).css("backgroundColor"));
+						if (finish == false && currentColor != colors[previousColorIndex]) {
+							moves++;
+							updateCounter(moves,maxMoves);
+							previousColorIndex = $.inArray(currentColor,colors);
+							}
+				
+						for(var row = 0; row < size; row++) {
+							for(var col = 0; col < size; col++) {
+								if(mainTableArray[row][col] == true) {
+									changeColor(row,col,currentColor);
+									neighborCells(mainTableArray,row,col,currentColor);
+									}
+								}
+							}
+					
+						if (mainTableArray.every(function(arr) {return arr.every(Boolean)}) && finish != true) {
+							document.getElementById("end").innerHTML="<span>You win!</span>";
+							$("#end").fadeIn("slow");
+							$("#again").fadeIn("slow");
+							finish = true;
+							}
+
+						else if (moves == maxMoves && finish != true) {
+							document.getElementById("end").innerHTML="<span>You lose!</span>";
+							$("#end").fadeIn("slow");
+							$("#again").fadeIn("slow");
+							finish = true;
+							}
+				});
 				
 					// hover effect
 					$(this).hover(
@@ -286,39 +315,6 @@ $(document).ready(
 							$(this).stop().animate({"opacity": 1});
 						}
 					);
-				
-					//set what happens when a color is clicked
-					$(this).click(
-						function() {
-							if (finish == false && color != previousColor) {
-								moves++;
-								updateCounter(moves,maxMoves);
-								previousColor = color;
-								}
-					
-							for(var row = 0; row < size; row++) {
-								for(var col = 0; col < size; col++) {
-									if(mainTableArray[row][col] == true) {
-										changeColor(row,col,color);
-										neighborCells(mainTableArray,row,col,color);
-										}
-									}
-								}
-						
-							if (mainTableArray.every(function(arr) {return arr.every(Boolean)}) && finish != true) {
-								document.getElementById("end").innerHTML="<span>You win!</span>";
-								$("#end").fadeIn("slow");
-								$("#again").fadeIn("slow");
-								finish = true;
-								}
-
-							else if (moves == maxMoves && finish != true) {
-								document.getElementById("end").innerHTML="<span>You lose!</span>";
-								$("#end").fadeIn("slow");
-								$("#again").fadeIn("slow");
-								finish = true;
-								}
-					});
 				});
 			}
 
@@ -347,8 +343,21 @@ $(document).ready(
 				function() {
 					$(this).click(
 						function() {
-							colors = eval(this.id)
-							newGame($('#main_table tr').length,colors);
+							var newColors = eval(this.id);
+							$("#main_table td").each(
+								function() {
+									var colorIndex = $.inArray(rgb2hex($(this).css("backgroundColor")),colors);
+									var newColor = newColors[colorIndex];
+									$(this).css("backgroundColor",newColor)
+								});
+							$("#color_table td").each(
+								function() {
+									var colorIndex = $.inArray(rgb2hex($(this).css("backgroundColor")),colors);
+									var newColor = newColors[colorIndex];
+									$(this).css("backgroundColor",newColor)
+								}
+								)
+							colors = newColors;
 							}
 						);
 					}
