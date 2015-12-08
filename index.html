@@ -1,34 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="flood.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script src="flood.js"></script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-59020727-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Flood Game</title>
+<link rel="stylesheet" type="text/css" href="style.css"> 
+<script src="bower_components/underscore/underscore-min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="flood.js"></script>
+<script src="templates.js"></script>
+
+<script src="testing.js"></script>
+<script src="colors.js"></script>
+<script src="main.js"></script>
 </head>
 <body>
-<div class="container"><table id="main_table"></table></div>
-<div class="container"><div id="end"></div></div>
-<div id="menu">
-	<div id="new_game" class="menu_item">New Game</div>
-	<div id="sizes" class="menu_item">Sizes</div>
-	<div id="sizes_content"></div>
-	<div id="colors" class="menu_item">Colors</div>
-	<div id="colors_content"></div>
-	<div id="help" class="menu_item">Help</div>
-	<div id="help_content">Fill the board with a single color before running out of moves. Use the buttons below the counter to change the colors.</div>
-	<div id="counter"></div>
-</div>
+	<h1>Flood Game</h1>
+	<div id="control-container">
+		<div id="counter-container"></div>
+		<div id="buttons-container"></div>
+		<p>
+			<button class="main-button" id="new-game">New Game</button>
+			<button class="main-button" id="options-toggle">Options</button>
+			<button class="main-button" id="help-toggle">Help</button>
+		</p>
+		<div id="options-container" style="display:none;">
+			<button class="option-toggle" id="options-colors-toggle">Color scheme</button>
+				<div id="options-colors" class="option-div">
+				</div>
+				<br>
+
+			<button class="option-toggle" id="options-ncolors-toggle">Number of colors</button>
+				<div id="options-ncolors" class="option-div">
+					<input type="range" min="3" max="5" value="4">
+				</div>
+				<br>
+
+			<button class="option-toggle" id="options-height-toggle">Height</button>
+				<div id="options-height" class="option-div">
+					<input type="range" min="4" max="60">
+				</div>
+				<br>
+
+			<button class="option-toggle" id="options-width-toggle">Width</button>
+				<div id="options-width" class="option-div">
+					<input type="range" min="4" max="60">
+				</div>
+				<br>
+
+			<button class="option-toggle" id="options-sizing-toggle">Sizing</button>
+				<div id="options-sizing" class="option-div">
+					<input type="range" min="200" max="500">
+				</div>
+		</div>
+		<div id="help-container" style="display:none;">
+			Try to fill the graph with a single color before you run out of moves.
+		</div>
+	</div>
+	<div id="graph-container"></div>
 </body>
 </html>
