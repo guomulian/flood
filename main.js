@@ -3,11 +3,7 @@ var schemes = [
 	['#D60061', '#FF5C00', '#8BEA00', '#00A779', '#3D281D'],
 	['#206176', '#BD882E', '#654308', '#BD602E', '#652908'],
 	['#DAEBB0', '#849E44', '#3B3F74', '#A78E48', '#813868']
-]
-
-function movesCalculate(height,width,ncolors) {
-	return Math.floor(Math.sqrt(height*width*ncolors));
-}
+];
 
 // initial values
 var colors = schemes[0];
@@ -16,7 +12,7 @@ var height = 10;
 var ncolors = 3;
 var sizing = 300;
 
-var moves = movesCalculate(height,width,ncolors);
+var moves = maxAllowedMoves(height,width,ncolors);
 var counter = 0;
 // ncolors <= colors
 
@@ -103,11 +99,11 @@ $(document).ready(function() {
 	$('#options-ncolors input').change(function() {
 		ncolors = $(this).val();
 		counter = 0;
-		
-		moves = movesCalculate(height,width,ncolors);
-		
+
+		moves = maxAllowedMoves(height,width,ncolors);
+
 		game = new Grid(width,height,ncolors);
-		
+
 		refreshCounter(counter,moves);
 		refreshButtons(colors,ncolors);
 		refreshGraph(game,colors,height,width,sizing);
@@ -117,7 +113,7 @@ $(document).ready(function() {
 		height = $(this).val();
 		counter = 0;
 
-		moves = movesCalculate(height,width,ncolors);
+		moves = maxAllowedMoves(height,width,ncolors);
 
 		game = new Grid(width,height,ncolors);
 
@@ -130,7 +126,7 @@ $(document).ready(function() {
 		width = $(this).val();
 		counter = 0;
 
-		moves = movesCalculate(height,width,ncolors);
+		moves = maxAllowedMoves(height,width,ncolors);
 
 		game = new Grid(width,height,ncolors);
 
@@ -143,7 +139,7 @@ $(document).ready(function() {
 		sizing = $(this).val();
 		counter = 0;
 
-		moves = movesCalculate(height,width,ncolors);
+		moves = maxAllowedMoves(height,width,ncolors);
 
 		refreshCounter(counter,moves);
 		refreshButtons(colors,ncolors);
