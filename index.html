@@ -1,59 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Flood Game</title>
-<link rel="stylesheet" type="text/css" href="style.css"> 
-<script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
-<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="flood.js"></script>
-<script type="text/javascript" src="templates.js"></script>
-<script type="text/javascript" src="testing.js"></script>
-<script type="text/javascript" src="main.js"></script>
-</head>
-<body>
-	<h1>Flood Game</h1>
-	<div id="control-container">
-		<div id="counter-container"></div>
-		<div id="buttons-container"></div>
-		<p>
-			<button class="main-button" id="new-game">New Game</button>
-			<button class="main-button" id="options-toggle">Options</button>
-			<button class="main-button" id="help-toggle">Help</button>
-		</p>
-		<div id="options-container" style="display:none;">
-			<button class="option-toggle" id="options-colors-toggle">Color scheme</button>
-				<div id="options-colors" class="option-div">
-				</div>
-				<br>
-
-			<button class="option-toggle" id="options-ncolors-toggle">Number of colors</button>
-				<div id="options-ncolors" class="option-div">
-					<input type="range" min="3" max="5" value="4">
-				</div>
-				<br>
-
-			<button class="option-toggle" id="options-height-toggle">Height</button>
-				<div id="options-height" class="option-div">
-					<input type="range" min="4" max="60">
-				</div>
-				<br>
-
-			<button class="option-toggle" id="options-width-toggle">Width</button>
-				<div id="options-width" class="option-div">
-					<input type="range" min="4" max="60">
-				</div>
-				<br>
-
-			<button class="option-toggle" id="options-sizing-toggle">Sizing</button>
-				<div id="options-sizing" class="option-div">
-					<input type="range" min="200" max="500">
-				</div>
-		</div>
-		<div id="help-container" style="display:none;">
-			Try to fill the graph with a single color before you run out of moves.
-		</div>
-	</div>
-	<div id="graph-container"></div>
-</body>
+  <head>
+    <meta charset="UTF-8" content-type="text/html">
+    <title>Flood Game</title>
+    <link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="assets/favicon-16x16.png" sizes="16x16" />
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script src="js/helpers.js" type="text/javascript"></script>
+    <script src="js/tile.js" type="text/javascript"></script>
+    <script src="js/board.js" type="text/javascript"></script>
+    <script src="js/game.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <h1 class="text-huge">Flood Game</h1>
+    <div class="container">
+    <p class="text-small">Try to fill the grid with a single color before you run out of moves.</p>
+      <div id="main-menu-screen">
+        <ul class="nav padding-small">
+          <li class="padding-small"><button class="text-medium" id="new-game-btn">New Game</button></li>
+          <li class="padding-small"><button class="text-medium" id="options-btn">Options</button></li>
+        </ul>
+      </div>
+      <div id="options-menu">
+        <p class="clear text-small"><span class="align-left">Color Scheme</span><select class="align-right" id="color-scheme-options"></select></p>
+        <p class="clear text-small"><span class="align-left">Number of Colors</span><select class="align-right" id="number-of-colors-options"></select></p>
+        <p class="clear text-small"><span class="align-left">Grid Size</span><select class="align-right" id="size-options"></select>
+        </p>
+      </div>
+      <table id="board">
+      </table>
+      <div class="align-left padding-tiny" id="controls">
+      </div>
+      <div class="align-right padding-tiny text-large" id="counter">
+      </div>
+    </div>
+  </body>
 </html>
