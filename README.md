@@ -4,7 +4,7 @@ A JavaScript version of the game Flood-It! ([Google Play](https://play.google.co
 
 ## Screenshot
 
-![Screenshot of game.](https://raw.githubusercontent.com/guomulian/flood/gh-pages/assets/screenshot.png)
+![Screenshot of game.](https://raw.githubusercontent.com/guomulian/flood/gh-pages/images/screenshot.png)
 
 ## Demo
 
