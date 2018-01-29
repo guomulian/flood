@@ -51,10 +51,6 @@ window.onload = function() {
         "options_menu" : document.getElementById("options-menu")
     };
 
-    function newGame() {
-        g.restartGame();
-    }
-
     function toggleOptionsMenu() {
         let div = other_elements.options_menu;
 
@@ -65,18 +61,6 @@ window.onload = function() {
         else {
             div.style.display = "none";
         }
-    }
-
-    function changeColorScheme(color_scheme) {
-        g.changeColorScheme(color_scheme);
-    }
-
-    function changeNumberOfColors(number_of_colors) {
-        g.changeNumberOfColors(number_of_colors);
-    }
-
-    function changeSize(size) {
-        g.changeSize(size);
     }
 
     function getDefault(key) {
@@ -92,7 +76,7 @@ window.onload = function() {
 
     g.drawEverything();
 
-    main_menu_btns.new_game.addEventListener("click", newGame);
+    main_menu_btns.new_game.addEventListener("click", Game.prototype.restartGame.bind(g));
     main_menu_btns.options.addEventListener("click", toggleOptionsMenu);
 
     function drawOption(key, fun) {
@@ -105,7 +89,7 @@ window.onload = function() {
         }, false);
     }
 
-    drawOption("color_scheme", changeColorScheme);
-    drawOption("number_of_colors", changeNumberOfColors);
-    drawOption("size", changeSize);
+    drawOption("color_scheme", Game.prototype.changeColorScheme.bind(g));
+    drawOption("number_of_colors", Game.prototype.changeNumberOfColors.bind(g));
+    drawOption("size", Game.prototype.changeSize.bind(g));
 };
