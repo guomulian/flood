@@ -38,7 +38,7 @@ button:hover {
     font-size: 28pt;
 }
 
-.btn {
+.control-button {
     height: 45px;
     width: 45px;
     border-radius: 50%;

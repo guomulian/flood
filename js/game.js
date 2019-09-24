@@ -48,7 +48,7 @@ Game.prototype.drawControls = function() {
         let button = document.createElement("button");
         let color = self.color_scheme[i];
 
-        button.classList.add("btn");
+        button.classList.add("control-button");
         button.style.backgroundColor = color;
         button.addEventListener("click", function() {
             self.board.flood(i);
