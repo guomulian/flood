@@ -1,0 +1,268 @@
+@charset 'utf-8';
+
+@import 'normalize';
+@import 'mixins';
+@import 'variables';
+
+* {
+    @include transition($transition-speed-default);
+}
+
+html, body {
+    font-family: $text-font-stack;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $header-font-stack;
+}
+
+fieldset {
+    border: none;
+    margin: 10px;
+}
+
+.board {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.board-row {
+    display: table-row;
+}
+
+.center-area {
+    grid-area: 2 / 2 / 5 / 5;
+    justify-self: stretch;
+}
+
+.control-button {
+    border-radius: 50%;
+    border: 1px solid grey;
+    vertical-align: top;
+
+    @include respond-to('min-small') {
+        height: 35px;
+        margin: 3px;
+        width: 35px;
+    }
+
+    @include respond-to('min-medium') {
+        font-size: 1.5rem;
+        height: 50px;
+        margin: 5px;
+        width: 50px;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        @include transform(scale(1.2));
+        @include box-shadow(2px, 2px, 5px, 0, grey);
+        outline: none;
+    }
+}
+
+.counter {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    vertical-align: baseline;
+
+    @include respond-to('min-small') {
+        font-size: 1.5rem;
+    }
+
+    @include respond-to('min-medium') {
+        font-size: 1.75rem;
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+.header {
+    margin: 0;
+
+    @include respond-to('min-small') {
+        font-size: 1.5rem;
+    }
+
+    @include respond-to('min-medium') {
+        font-size: 2.5rem;
+    }
+}
+
+.inline-flex {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.options {
+    margin-top: 1.25rem;
+    text-align: left;
+    font-size: 14pt;
+
+    input[type="radio"] {
+        display: none;
+
+        &:checked + label {
+            border: 1px solid #aaaaaa;
+            @include transition(0.25s ease);
+        }
+
+        & + label {
+            margin: 1px;
+            padding: 3px 8px;
+        }
+    }
+}
+
+.scheme {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.scheme-tile {
+    border-radius: 50%;
+    display: inline-block;
+    height: 40px;
+    margin: 2px;
+    width: 40px;
+}
+
+.select {
+    width: 100%;
+    padding: 10px;
+}
+
+.side-left {
+    grid-area: 2 / 1 / 5 / 2;
+    justify-self: end;
+    margin: 0 20px;
+    text-align: right;
+    color: #555555;
+}
+
+.side-right {
+    grid-area: 2 / 5 / 5 / 6;
+    justify-self: start;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.side-top {
+    align-self: end;
+    grid-area: 1 / 2 / 2 / 5;
+    margin-bottom: 10px;
+}
+
+.side-bottom {
+    align-self: start;
+    grid-area: 5 / 2 / 6 / 5;
+    margin-top: 5px;
+}
+
+.tile {
+    display: table-cell;
+}
+
+.wrapper {
+    align-content: stretch;
+    display: grid;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    margin: 0 auto;
+    text-align: center;
+    width: max-content;
+
+    @include respond-to('min-small') {
+        height: 550px;
+        width: 550px;
+    }
+
+    @include respond-to('min-medium') {
+        height: 800px;
+        width: 800px;
+    }
+}
+
+
+/*
+* Modal component taken from VueJS docs.
+*/
+
+.modal-mask {
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity .3s ease;
+  width: 100%;
+  z-index: 9998;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0px auto;
+  padding: 20px 30px;
+  transition: all .3s ease;
+  width: 300px;
+}
+
+.modal-header h2 {
+  margin-top: 0;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-footer {
+    text-align: right;
+}
+
+.modal-default-button {
+  background-color: white;
+  padding: 6px 8px;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+
+.modal-container {
+    .modal-enter-active,
+    .modal-leave-active {
+        @include transition(0.5s ease);
+    }
+}

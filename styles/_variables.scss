@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik|Lato');
+
+$header-font-stack: 'Rubik', sans-serif;
+$text-font-stack: 'Lato', sans-serif;
+
+$transition-speed-default: 0.25s;
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+$breakpoints: (
+  'min-small': (min-width: 320px),
+  'min-medium': (min-width: 768px),
+  'min-large': (min-width: 1024px),
+  'max-small': (max-width: 320px),
+  'max-medium': (max-width: 768px),
+  'max-large': (max-width: 1024px),
+) !default;
