@@ -59,7 +59,7 @@ fieldset {
 .control-button {
     border-radius: 50%;
     border: 1px solid grey;
-    font-size: $font-size-small;
+    font-size: $font-size-default;
     height: 60px;
     width: 60px;
     margin: 10px;
@@ -188,9 +188,9 @@ fieldset {
     border: 1px solid #888888;
     border-radius: 50%;
     display: inline-block;
-    height: 60px;
-    margin: 10px 0;
-    width: 60px;
+    height: 30px;
+    margin: 8px 0;
+    width: 30px;
 
     @include respond-to('min-small') {
         height: 50px;
@@ -222,7 +222,7 @@ fieldset {
 
 .side-bottom {
     grid-area: bottom;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     justify-content: space-around;
 }
 
