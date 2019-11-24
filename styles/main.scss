@@ -207,7 +207,7 @@ fieldset {
     grid-area: left;
     justify-self: end;
 
-    @include respond-to('min-small') {
+    @include respond-to('min-medium') {
         text-align: right;
     }
 }
@@ -247,7 +247,7 @@ fieldset {
             "left"
             "right";
 
-    @include respond-to('min-small') {
+    @include respond-to('min-medium') {
         grid-template-areas:
             ". top ."
             "left main right"
