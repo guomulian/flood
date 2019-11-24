@@ -343,12 +343,12 @@ fieldset {
   min-width: 200px; }
   @media (min-width: 320px) {
     .center-area {
-      height: 300px;
-      width: 300px; } }
+      height: 250px;
+      width: 250px; } }
   @media (min-width: 768px) {
     .center-area {
-      height: 500px;
-      width: 500px; } }
+      height: 350px;
+      width: 350px; } }
 
 .control-button {
   border-radius: 50%;
@@ -359,15 +359,15 @@ fieldset {
   margin: 10px; }
   @media (min-width: 320px) {
     .control-button {
-      font-size: 14pt;
-      height: 40px;
-      width: 40px;
+      font-size: 18pt;
+      height: 80px;
+      width: 80px;
       margin: 5px; } }
   @media (min-width: 768px) {
     .control-button {
-      font-size: 18pt;
-      height: 60px;
-      width: 60px; } }
+      font-size: 14pt;
+      height: 40px;
+      width: 40px; } }
 
 .counter {
   margin: 0;
@@ -389,10 +389,10 @@ fieldset {
   font-size: 14pt; }
   @media (min-width: 320px) {
     .header {
-      font-size: 21pt; } }
+      font-size: 18pt; } }
   @media (min-width: 768px) {
     .header {
-      font-size: 35pt; } }
+      font-size: 28pt; } }
 
 .inline-flex {
   display: inline-flex;
@@ -408,7 +408,7 @@ fieldset {
       min-width: 100px; } }
   @media (min-width: 768px) {
     .instructions {
-      font-size: 14pt;
+      font-size: 12pt;
       min-width: 100px; } }
 
 .options {
@@ -461,9 +461,9 @@ fieldset {
   border: 1px solid #888888;
   border-radius: 50%;
   display: inline-block;
-  height: 30px;
+  height: 60px;
   margin: 10px 0;
-  width: 30px; }
+  width: 60px; }
   @media (min-width: 320px) {
     .scheme-tile {
       height: 50px;
@@ -489,7 +489,7 @@ fieldset {
 
 .side-bottom {
   grid-area: bottom;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   justify-content: space-around; }
 
 .tile {
@@ -498,8 +498,8 @@ fieldset {
 .wrapper {
   align-content: stretch;
   display: grid;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
   grid-template-columns: auto min-content auto;
   grid-template-rows: auto min-content auto;
   grid-template-areas: ". top ." "left main right" ". bottom .";
