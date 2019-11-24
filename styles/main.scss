@@ -62,7 +62,7 @@ fieldset {
     font-size: $font-size-default;
     height: 60px;
     width: 60px;
-    margin: 10px;
+    margin: 15px;
 
     @include respond-to('min-small') {
         font-size: $font-size-large;
@@ -206,7 +206,10 @@ fieldset {
 .side-left {
     grid-area: left;
     justify-self: end;
-    text-align: right;
+
+    @include respond-to('min-small') {
+        text-align: right;
+    }
 }
 
 .side-right {
@@ -236,11 +239,20 @@ fieldset {
     grid-column-gap: 15px;
     grid-row-gap: 15px;
     grid-template-columns: auto min-content auto;
-    grid-template-rows: auto min-content auto;
+    grid-template-rows: auto repeat(autofill, min-content) auto;
     grid-template-areas:
+            "top"
+            "main"
+            "bottom"
+            "left"
+            "right";
+
+    @include respond-to('min-small') {
+        grid-template-areas:
             ". top ."
             "left main right"
             ". bottom .";
+    }
     margin: 0 auto;
     padding: 30px;
     text-align: center;
