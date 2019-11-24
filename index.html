@@ -90,6 +90,11 @@
     </flood-board>
 
     <div class="side-left">
+      <p class="instructions">Try to fill the board with a single color before you run out of moves.</p>
+      <a href="https://www.github.com/guomulian/flood"><img src="assets/github.png" alt="github"></a>
+    </div>
+
+    <div class="side-bottom inline-flex full-width">
       <button class="control-button"
               @click="restartGame"
               aria-label="restart"
@@ -102,14 +107,6 @@
               :tabindex="optionsHidden ? 0 : -1">
         <i class="fa fa-cog" aria-hidden="true"></i>
       </button>
-    </div>
-
-    <div class="side-right">
-      <p class="instructions">Try to fill the board with a single color before you run out of moves.</p>
-      <a href="https://www.github.com/guomulian/flood"><img src="assets/github.png" alt="github"></a>
-    </div>
-
-    <div class="side-bottom inline-flex full-width">
       <button class="control-button"
               @click="flood(n - 1)"
               v-for="n in nColors"
