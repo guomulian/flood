@@ -126,7 +126,9 @@
 Vue.component('modal', {
     template: `<transition name="modal">
                 <div class="modal-mask"
-                     @keydown.esc="$emit('close')">
+                     @keydown.esc="$emit('close')"
+                     @click.self="$emit('close')"
+                     tabindex="0">
                   <div class="modal-container">
                     <div class="modal-header">
                       <slot name="header">
@@ -135,6 +137,7 @@ Vue.component('modal', {
                           aria-label="close"
                           class="modal-default-button" 
                           @click="$emit('close')"
+                          @keydown.enter="$emit('close')"
                           tabindex="0">
                           &times;
                       </div>
