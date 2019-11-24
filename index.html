@@ -19,11 +19,11 @@
     <link rel="stylesheet" type="text/css" href="styles/main.css">
   </head>
 <div id="app">
-  <modal v-if="isGameOver" @close="restartGame">
+  <modal :is-active="isGameOver" @close="restartGame">
     <h2 slot="header">Game Over</h2>
     <p slot="body">You {{ isGameWon ? "won with " + (moveLimit - moveCounter) + " move" + ((moveLimit - moveCounter) == 1 ? "" : "s") + " left" : "lost" }}!</p>
   </modal>
-  <modal v-if="!optionsHidden" @close="optionsHidden = true">
+  <modal :is-active="!optionsHidden" @close="optionsHidden = true">
     <h2 slot="header">Options</h2>
     <form class="options"
           :class="{hidden: optionsHidden}"
@@ -124,8 +124,10 @@
 
 <script type="text/javascript">
 Vue.component('modal', {
+    props: ['isActive'],
     template: `<transition name="modal">
                 <div class="modal-mask"
+                     v-if="isActive"
                      @keydown.esc="$emit('close')"
                      @click.self="$emit('close')"
                      tabindex="0">
@@ -287,6 +289,7 @@ var app = new Vue({
         this.restartGame()
     },
     modalIsOpen: function (isOpen) {
+        // prevent body from scrolling
         if (isOpen) {
           document.body.style.overflow = 'hidden'
         }

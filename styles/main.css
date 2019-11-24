@@ -305,9 +305,9 @@ template {
   display: none; }
 
 * {
-  -moz-transition: 0.25s;
-  -o-transition: 0.25s;
-  transition: 0.25s; }
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s; }
 
 html, body {
   font-family: "Lato", sans-serif;
@@ -428,9 +428,9 @@ fieldset {
       border: 1px solid #888888;
       color: black;
       opacity: 1;
-      -moz-transition: 0.25s ease;
-      -o-transition: 0.25s ease;
-      transition: 0.25s ease; }
+      -moz-transition: 0.2s ease;
+      -o-transition: 0.2s ease;
+      transition: 0.2s ease; }
     .options input[type="radio"] + label {
       font-size: 28pt;
       opacity: 0.5;
@@ -564,7 +564,17 @@ fieldset {
   align-items: center;
   margin: 0; }
   .modal-default-button:hover, .modal-default-button:focus, .modal-default-button:active {
-    color: grey; }
+    border: 1px solid grey;
+    color: grey;
+    outline: none;
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    -webkit-box-shadow: 2px 2px 5px 0 grey;
+    -moz-box-shadow: 2px 2px 5px 0 grey;
+    box-shadow: 2px 2px 5px 0 grey;
+    outline: none; }
 
 /*
  * The following styles are auto-applied to elements with
@@ -574,16 +584,14 @@ fieldset {
  * You can easily play with the modal transition by editing
  * these styles.
  */
-.modal-enter {
-  opacity: 0; }
-
+.modal-enter,
 .modal-leave-active {
   opacity: 0; }
 
 .modal-container .modal-enter-active,
 .modal-container .modal-leave-active {
-  -moz-transition: 0.25s ease;
-  -o-transition: 0.25s ease;
-  transition: 0.25s ease; }
+  -moz-transition: 0.2s ease;
+  -o-transition: 0.2s ease;
+  transition: 0.2s ease; }
 
 /*# sourceMappingURL=main.css.map */
