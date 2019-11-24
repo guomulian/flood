@@ -156,16 +156,21 @@ fieldset {
         }
 
         & + label {
-            border-radius: 50px;
-            font-size: 1.25*$font-size-large;
+            font-size: $font-size-huge;
             opacity: 0.5;
-            padding: 0.25rem 0.8rem;
+            padding: 0.5rem 1rem;
+
+                @include respond-to('min-medium') {
+                    font-size: $font-size-large;
+                }
         }
 
         &:hover + label,
         &:focus + label,
         &:active + label {
+
             @include scale-shadow(1.05);
+
             background-color: #ffffff;
             border: 1px solid #888888;
             opacity: 1;
@@ -176,26 +181,27 @@ fieldset {
         font-family: $font-stack-text;
         font-size: $font-size-large;
         font-weight: bold;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 }
 
 .scheme {
     align-content: space-between;
     display: flex;
+    margin: 10px 0;
 }
 
 .scheme-tile {
     border: 1px solid #888888;
     border-radius: 50%;
     display: inline-block;
-    height: 30px;
+    height: 50px;
     margin: 8px 0;
-    width: 30px;
+    width: 50px;
 
-    @include respond-to('min-small') {
-        height: 50px;
-        width: 50px;
+    @include respond-to('min-medium') {
+        height: 30px;
+        width: 30px;
     }
 }
 
@@ -278,7 +284,6 @@ fieldset {
 
 .modal-container {
   background-color: #ffffff;
-  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   margin: 10px auto;
   overflow: auto;
