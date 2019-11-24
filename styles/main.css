@@ -476,7 +476,7 @@ fieldset {
 .side-left {
   grid-area: left;
   justify-self: end; }
-  @media (min-width: 320px) {
+  @media (min-width: 768px) {
     .side-left {
       text-align: right; } }
 
@@ -509,7 +509,7 @@ fieldset {
   padding: 30px;
   text-align: center;
   width: min-content; }
-  @media (min-width: 320px) {
+  @media (min-width: 768px) {
     .wrapper {
       grid-template-areas: ". top ." "left main right" ". bottom ."; } }
 
