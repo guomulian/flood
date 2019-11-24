@@ -10,6 +10,7 @@
 
       gtag('config', 'UA-59020727-1');
     </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Flood game in JavaScript.">
     <title>Flood Game</title>
     <link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32" />
@@ -89,11 +90,6 @@
     </flood-board>
 
     <div class="side-left">
-      <p class="instructions">Try to fill the board with a single color before you run out of moves.</p>
-      <a href="https://www.github.com/guomulian/flood"><img src="assets/github.png" alt="github"></a>
-    </div>
-
-    <div class="side-bottom inline-flex full-width">
       <button class="control-button"
               @click="restartGame"
               aria-label="restart"
@@ -106,6 +102,14 @@
               :tabindex="optionsHidden ? 0 : -1">
         <i class="fa fa-cog" aria-hidden="true"></i>
       </button>
+    </div>
+
+    <div class="side-right">
+      <p class="instructions">Try to fill the board with a single color before you run out of moves.</p>
+      <a href="https://www.github.com/guomulian/flood"><img src="assets/github.png" alt="github"></a>
+    </div>
+
+    <div class="side-bottom inline-flex full-width">
       <button class="control-button"
               @click="flood(n - 1)"
               v-for="n in nColors"
