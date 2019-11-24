@@ -241,7 +241,8 @@ fieldset {
             ". top ."
             "left main right"
             ". bottom .";
-    margin: 30px auto;
+    margin: 0 auto;
+    padding: 30px;
     text-align: center;
     width: min-content;
 }
@@ -293,7 +294,7 @@ fieldset {
 
 .modal-default-button {
   background-color: rgba(0, 0, 0, 0);
-  font-size: 18pt;
+  font-size: 24pt;
   height: 1em;
   width: 1em;
   display: flex;
