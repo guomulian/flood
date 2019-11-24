@@ -31,8 +31,8 @@ fieldset {
 
 .board {
     display: table;
-    height: 100%;
     width: 100%;
+    height: 100%;
 }
 
 .board-row {
@@ -40,21 +40,35 @@ fieldset {
 }
 
 .center-area {
-    grid-area: 2 / 2 / 5 / 5;
-    justify-self: stretch;
+    grid-area: main;
+
+    min-height: $size-board-tiny;
+    min-width: $size-board-tiny;
+    
+    @include respond-to('min-small') {
+        height: $size-board-small;
+        width: $size-board-small;
+    }
+
+    @include respond-to('min-medium') {
+        height: $size-board-medium;
+        width: $size-board-medium;
+    }
 }
 
 .control-button {
     border-radius: 50%;
     border: 1px solid grey;
     font-size: $font-size-small;
-    height: 30px;
-    width: 30px;
+    height: 60px;
+    width: 60px;
+    margin: 10px;
 
     @include respond-to('min-small') {
         font-size: $font-size-default;
         height: 40px;
         width: 40px;
+        margin: 5px;
     }
 
     @include respond-to('min-medium') {
@@ -108,10 +122,12 @@ fieldset {
 
     @include respond-to('min-small') {
         font-size: $font-size-small;
+        min-width: 100px;
     }
 
     @include respond-to('min-medium') {
         font-size: $font-size-default;
+        min-width: 100px;
     }
 }
 
@@ -140,8 +156,7 @@ fieldset {
 
         & + label {
             border-radius: 50px;
-            font-family: $font-stack-monospace;
-            font-size: 1.25*$font-size-medium;
+            font-size: 1.25*$font-size-large;
             opacity: 0.5;
             padding: 0.25rem 0.8rem;
         }
@@ -150,13 +165,13 @@ fieldset {
         &:focus + label,
         &:active + label {
             @include scale-shadow(1.05);
+            background-color: #ffffff;
             border: 1px solid #888888;
             opacity: 1;
         }
     }
 
     legend {
-        color: #555555;
         font-family: $font-stack-text;
         font-size: $font-size-large;
         font-weight: bold;
@@ -174,8 +189,13 @@ fieldset {
     border-radius: 50%;
     display: inline-block;
     height: 30px;
-    margin: 8px 0;
+    margin: 10px 0;
     width: 30px;
+
+    @include respond-to('min-small') {
+        height: 50px;
+        width: 50px;
+    }
 }
 
 .select {
@@ -184,29 +204,26 @@ fieldset {
 }
 
 .side-left {
-    grid-area: 2 / 1 / 5 / 2;
+    grid-area: left;
     justify-self: end;
-    margin: 0 20px;
     text-align: right;
 }
 
 .side-right {
-    grid-area: 2 / 5 / 5 / 6;
+    grid-area: right;
     justify-self: start;
-    margin-left: 20px;
     text-align: left;
 }
 
 .side-top {
     align-self: end;
-    grid-area: 1 / 2 / 2 / 5;
-    margin-bottom: 10px;
+    grid-area: top;
 }
 
 .side-bottom {
-    align-self: start;
-    grid-area: 5 / 2 / 6 / 5;
-    margin-top: 10px;
+    grid-area: bottom;
+    flex-wrap: wrap-reverse;
+    justify-content: space-around;
 }
 
 .tile {
@@ -216,24 +233,17 @@ fieldset {
 .wrapper {
     align-content: stretch;
     display: grid;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    height: map-get($breakpoints, 'small');
-    margin: 0 auto;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    grid-template-columns: auto min-content auto;
+    grid-template-rows: auto min-content auto;
+    grid-template-areas:
+            ". top ."
+            "left main right"
+            ". bottom .";
+    margin: 30px auto;
     text-align: center;
-    width: map-get($breakpoints, 'small');
-
-    @include respond-to('min-small') {
-        height: 550px;
-        width: 550px;
-    }
-
-    @include respond-to('min-medium') {
-        height: 800px;
-        width: 800px;
-    }
+    width: min-content;
 }
 
 
@@ -256,7 +266,7 @@ fieldset {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  margin: 0px auto;
+  margin: 10px auto;
   overflow: auto;
   position: relative;
   padding-top: 20px;
@@ -283,12 +293,19 @@ fieldset {
 
 .modal-default-button {
   background-color: rgba(0, 0, 0, 0);
-  border: 1px solid grey;
-  border-radius: 50%;
   font-size: 18pt;
-  height: 1.4em;
-  width: 1.4em;
+  height: 1em;
+  width: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: grey;
+  }
 }
 
 /*

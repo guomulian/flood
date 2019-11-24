@@ -331,27 +331,38 @@ fieldset {
 
 .board {
   display: table;
-  height: 100%;
-  width: 100%; }
+  width: 100%;
+  height: 100%; }
 
 .board-row {
   display: table-row; }
 
 .center-area {
-  grid-area: 2 / 2 / 5 / 5;
-  justify-self: stretch; }
+  grid-area: main;
+  min-height: 200px;
+  min-width: 200px; }
+  @media (min-width: 320px) {
+    .center-area {
+      height: 300px;
+      width: 300px; } }
+  @media (min-width: 768px) {
+    .center-area {
+      height: 500px;
+      width: 500px; } }
 
 .control-button {
   border-radius: 50%;
   border: 1px solid grey;
   font-size: 12pt;
-  height: 30px;
-  width: 30px; }
+  height: 60px;
+  width: 60px;
+  margin: 10px; }
   @media (min-width: 320px) {
     .control-button {
       font-size: 14pt;
       height: 40px;
-      width: 40px; } }
+      width: 40px;
+      margin: 5px; } }
   @media (min-width: 768px) {
     .control-button {
       font-size: 18pt;
@@ -393,10 +404,12 @@ fieldset {
   font-size: 8pt; }
   @media (min-width: 320px) {
     .instructions {
-      font-size: 12pt; } }
+      font-size: 12pt;
+      min-width: 100px; } }
   @media (min-width: 768px) {
     .instructions {
-      font-size: 14pt; } }
+      font-size: 14pt;
+      min-width: 100px; } }
 
 .options {
   font-size: 14pt;
@@ -419,8 +432,7 @@ fieldset {
       transition: 0.25s ease; }
     .options input[type="radio"] + label {
       border-radius: 50px;
-      font-family: "Roboto Mono", monospace;
-      font-size: 17.5pt;
+      font-size: 22.5pt;
       opacity: 0.5;
       padding: 0.25rem 0.8rem; }
     .options input[type="radio"]:hover + label, .options input[type="radio"]:focus + label, .options input[type="radio"]:active + label {
@@ -432,10 +444,10 @@ fieldset {
       -moz-box-shadow: 2px 2px 5px 0 grey;
       box-shadow: 2px 2px 5px 0 grey;
       outline: none;
+      background-color: #ffffff;
       border: 1px solid #888888;
       opacity: 1; }
   .options legend {
-    color: #555555;
     font-family: "Lato", sans-serif;
     font-size: 18pt;
     font-weight: bold;
@@ -450,34 +462,35 @@ fieldset {
   border-radius: 50%;
   display: inline-block;
   height: 30px;
-  margin: 8px 0;
+  margin: 10px 0;
   width: 30px; }
+  @media (min-width: 320px) {
+    .scheme-tile {
+      height: 50px;
+      width: 50px; } }
 
 .select {
   width: 100%;
   padding: 10px; }
 
 .side-left {
-  grid-area: 2 / 1 / 5 / 2;
+  grid-area: left;
   justify-self: end;
-  margin: 0 20px;
   text-align: right; }
 
 .side-right {
-  grid-area: 2 / 5 / 5 / 6;
+  grid-area: right;
   justify-self: start;
-  margin-left: 20px;
   text-align: left; }
 
 .side-top {
   align-self: end;
-  grid-area: 1 / 2 / 2 / 5;
-  margin-bottom: 10px; }
+  grid-area: top; }
 
 .side-bottom {
-  align-self: start;
-  grid-area: 5 / 2 / 6 / 5;
-  margin-top: 10px; }
+  grid-area: bottom;
+  flex-wrap: wrap-reverse;
+  justify-content: space-around; }
 
 .tile {
   display: table-cell; }
@@ -485,22 +498,14 @@ fieldset {
 .wrapper {
   align-content: stretch;
   display: grid;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  height: 320px;
-  margin: 0 auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-columns: auto min-content auto;
+  grid-template-rows: auto min-content auto;
+  grid-template-areas: ". top ." "left main right" ". bottom .";
+  margin: 30px auto;
   text-align: center;
-  width: 320px; }
-  @media (min-width: 320px) {
-    .wrapper {
-      height: 550px;
-      width: 550px; } }
-  @media (min-width: 768px) {
-    .wrapper {
-      height: 800px;
-      width: 800px; } }
+  width: min-content; }
 
 /*
 * Modal component taken from VueJS docs.
@@ -519,7 +524,7 @@ fieldset {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  margin: 0px auto;
+  margin: 10px auto;
   overflow: auto;
   position: relative;
   padding-top: 20px;
@@ -542,12 +547,15 @@ fieldset {
 
 .modal-default-button {
   background-color: rgba(0, 0, 0, 0);
-  border: 1px solid grey;
-  border-radius: 50%;
   font-size: 18pt;
-  height: 1.4em;
-  width: 1.4em;
+  height: 1em;
+  width: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0; }
+  .modal-default-button:hover, .modal-default-button:focus, .modal-default-button:active {
+    color: grey; }
 
 /*
  * The following styles are auto-applied to elements with

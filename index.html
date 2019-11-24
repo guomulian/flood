@@ -94,28 +94,26 @@
       <a href="https://www.github.com/guomulian/flood"><img src="assets/github.png" alt="github"></a>
     </div>
 
-    <div class="side-bottom">
-      <div class="inline-flex full-width">
-        <button class="control-button"
-                @click="restartGame"
-                aria-label="restart"
-                :tabindex="optionsHidden ? 0 : -1">
-          <i class="fa fa-repeat" aria-hidden="true"></i>
-        </button>
-        <button class="control-button"
-                @click="toggleOptions"
-                aria-label="options"
-                :tabindex="optionsHidden ? 0 : -1">
-          <i class="fa fa-cog" aria-hidden="true"></i>
-        </button>
-        <button class="control-button"
-                @click="flood(n - 1)"
-                v-for="n in nColors"
-                :style="{backgroundColor: colorScheme[n - 1]}"
-                :tabindex="optionsHidden ? 0 : -1"
-                :aria-label="'flood color ' + n">
-        </button>
-      </div>
+    <div class="side-bottom inline-flex full-width">
+      <button class="control-button"
+              @click="restartGame"
+              aria-label="restart"
+              :tabindex="optionsHidden ? 0 : -1">
+        <i class="fa fa-repeat" aria-hidden="true"></i>
+      </button>
+      <button class="control-button"
+              @click="toggleOptions"
+              aria-label="options"
+              :tabindex="optionsHidden ? 0 : -1">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+      </button>
+      <button class="control-button"
+              @click="flood(n - 1)"
+              v-for="n in nColors"
+              :style="{backgroundColor: colorScheme[n - 1]}"
+              :tabindex="optionsHidden ? 0 : -1"
+              :aria-label="'flood color ' + n">
+      </button>
     </div>
   </div>
 </div>
@@ -133,12 +131,13 @@ Vue.component('modal', {
                     <div class="modal-header">
                       <slot name="header">
                       </slot>
-                      <button
+                      <div
                           aria-label="close"
                           class="modal-default-button" 
-                          @click="$emit('close')">
+                          @click="$emit('close')"
+                          tabindex="0">
                           &times;
-                      </button>
+                      </div>
                     </div>
 
                     <div class="modal-body">
