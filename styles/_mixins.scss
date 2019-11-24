@@ -14,8 +14,13 @@
 @mixin transition($speed) {
     -moz-transition:    $speed;
     -o-transition:      $speed;
-    -webkit-transition: $speed;
     transition:         $speed;
+}
+
+@mixin scale-shadow($scale) {
+    @include transform(scale($scale));
+    @include box-shadow(2px, 2px, 5px, 0, grey);
+    outline: none;
 }
 
 /// Responsive breakpoint manager
@@ -23,7 +28,7 @@
 /// @param {String} $breakpoint - Breakpoint
 /// @requires $breakpoints
 @mixin respond-to($breakpoint) {
-  $raw-query: map-get($breakpoints, $breakpoint);
+  $raw-query: map-get($breakpoint-conditions, $breakpoint);
 
   @if $raw-query {
     $query: if(
@@ -37,6 +42,6 @@
     }
   } @else {
     @error 'No value found for `#{$breakpoint}`. '
-         + 'Please make sure it is defined in `$breakpoints` map.';
+         + 'Please make sure it is defined in `$breakpoint-conditions` map.';
   }
 }

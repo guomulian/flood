@@ -1,18 +1,34 @@
-@import url('https://fonts.googleapis.com/css?family=Rubik|Lato');
+@import url('https://fonts.googleapis.com/css?family=Rubik|Lato|Roboto|Roboto Mono|Ubuntu Mono');
 
-$header-font-stack: 'Rubik', sans-serif;
-$text-font-stack: 'Lato', sans-serif;
+$font-stack-header: 'Rubik', sans-serif;
+$font-stack-text: 'Lato', sans-serif;
+$font-stack-monospace: 'Roboto Mono', monospace;
 
-$transition-speed-default: 0.25s;
+$font-size-default: 14pt;
+$font-size-tiny: 8pt;
+$font-size-small: 12pt;
+$font-size-medium: 14pt;
+$font-size-large: 18pt;
+
+
+$speed-transition-default: 0.25s;
+
+$scale-default: 1.2;
 
 /// Breakpoints map
 /// @prop {String} keys - Keys are identifiers mapped to a given length
 /// @prop {Map} values - Values are actual breakpoints expressed in pixels
 $breakpoints: (
-  'min-small': (min-width: 320px),
-  'min-medium': (min-width: 768px),
-  'min-large': (min-width: 1024px),
-  'max-small': (max-width: 320px),
-  'max-medium': (max-width: 768px),
-  'max-large': (max-width: 1024px),
+    'small': 320px,
+    'medium': 768px,
+    'large': 1024px
+) !default;
+
+$breakpoint-conditions: (
+  'min-small': (min-width: map-get($breakpoints, 'small')),
+  'min-medium': (min-width: map-get($breakpoints, 'medium')),
+  'min-large': (min-width: map-get($breakpoints, 'large')),
+  'max-small': (max-width: map-get($breakpoints, 'small')),
+  'max-medium': (max-width: map-get($breakpoints, 'medium')),
+  'max-large': (max-width: map-get($breakpoints, 'large')),
 ) !default;

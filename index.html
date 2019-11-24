@@ -21,7 +21,7 @@
 <div id="app">
   <modal v-if="isGameOver" @close="restartGame">
     <h2 slot="header">Game Over</h2>
-    <p slot="body">You {{ isGameWon ? "won with " + (moveLimit - moveCounter) + " moves left" : "lost" }}!</p>
+    <p slot="body">You {{ isGameWon ? "won with " + (moveLimit - moveCounter) + " move" + ((moveLimit - moveCounter) == 1 ? "" : "s") + " left" : "lost" }}!</p>
   </modal>
   <modal v-if="!optionsHidden" @close="optionsHidden = true">
     <h2 slot="header">Options</h2>
@@ -30,54 +30,58 @@
           slot="body">
       <fieldset>
         <legend>Color Scheme</legend>
-        <div class="flex"
-          v-for="(colorScheme, n) in colorSchemeOptions">
+        <div class="scheme"
+             v-for="(colorScheme, n) in colorSchemeOptions">
           <input type="radio"
-          v-model="colorSchemeIndex"
-          :id="'color-scheme-radio-' + n"
-          :value="n"
-          :aria-label="'color scheme ' + n"
-          :tabindex="optionsHidden ? -1 : 0">
+                 v-model="colorSchemeIndex"
+                 :id="'color-scheme-radio-' + n"
+                 :value="n"
+                 :aria-label="'color scheme ' + n"
+                 :tabindex="optionsHidden ? -1 : 0">
           <label :for="'color-scheme-radio-' + n"
-            class="scheme">
+                 class="inline-flex full-width">
             <div class="scheme-tile"
-              v-for="color in colorScheme"
-              :color="color"
-              :style="{backgroundColor: color}">
+                 v-for="color in colorScheme"
+                 :color="color"
+                 :style="{backgroundColor: color}">
             </div>
           </label>
         </div>
       </fieldset>
       <fieldset>
         <legend>Number of Colors</legend>
-        <div class="inline-flex"
-          v-for="(nColors, n) in nColorsOptions">
-          <input type="radio"
-          v-model="nColorsIndex"
-          :id="'n-colors-radio-' + n"
-          :value="n"
-          :tabindex="optionsHidden ? -1 : 0">
-        <label :for="'n-colors-radio-' + n">{{ nColors }}</option>
-      </div>
+        <div class="inline-flex full-width">
+          <div v-for="(nColors, n) in nColorsOptions">
+            <input type="radio"
+                   v-model="nColorsIndex"
+                   :id="'n-colors-radio-' + n"
+                   :value="n"
+                   :tabindex="optionsHidden ? -1 : 0">
+            <label :for="'n-colors-radio-' + n">{{ nColors }}</label>
+          </div>
+        </div>
     </fieldset>
     <fieldset>
       <legend>Board Size</legend>
-      <div class="inline-flex"
-        v-for="(boardSize, n) in boardSizeOptions">
-        <input type="radio"
-        v-model="boardSizeIndex"
-        :id="'board-size-radio-' + n"
-        :value="n"
-        :tabindex="optionsHidden ? -1 : 0">
-      <label :for="'board-size-radio-' + n">{{ boardSize }}</option>
-    </div>
+      <div class="inline-flex full-width">
+        <div v-for="(boardSize, n) in boardSizeOptions">
+          <input type="radio"
+                 v-model="boardSizeIndex"
+                 :id="'board-size-radio-' + n"
+                 :value="n"
+                 :tabindex="optionsHidden ? -1 : 0">
+          <label :for="'board-size-radio-' + n">{{ boardSize }}</label>
+        </div>
+      </div>
     </fieldset>
     </form>
   </modal>
   <div class="wrapper">
-    <div class="side-top inline-flex">
-      <h1 class="header">Flood Game</h1>
-      <div class="counter">{{ moveCounter }}/{{ moveLimit }}</div>
+    <div class="side-top">
+      <div class="inline-flex full-width">
+        <h1 class="header">Flood Game</h1>
+        <div class="counter">{{ moveCounter }}/{{ moveLimit }}</div>
+      </div>
     </div>
 
     <flood-board class="center-area"
@@ -86,18 +90,32 @@
     </flood-board>
 
     <div class="side-left">
-      <p>Try to fill the board with a single color before you run out of moves.</p>
+      <p class="instructions">Try to fill the board with a single color before you run out of moves.</p>
       <a href="https://www.github.com/guomulian/flood"><img src="assets/github.png" alt="github"></a>
     </div>
 
     <div class="side-bottom">
-      <button class="control-button" @click="restartGame" aria-label="restart"><i class="fa fa-repeat" aria-hidden="true"></i></button>
-      <button class="control-button" @click="toggleOptions" aria-label="options"><i class="fa fa-cog" aria-hidden="true"></i></button>
-      <button class="control-button" @click="flood(n - 1)"
-              v-for="n in nColors"
-              :style="{backgroundColor: colorScheme[n - 1]}"
-              :tabindex="optionsHidden ? 0 : -1"
-              :aria-label="'flood color ' + n"></button>
+      <div class="inline-flex full-width">
+        <button class="control-button"
+                @click="restartGame"
+                aria-label="restart"
+                :tabindex="optionsHidden ? 0 : -1">
+          <i class="fa fa-repeat" aria-hidden="true"></i>
+        </button>
+        <button class="control-button"
+                @click="toggleOptions"
+                aria-label="options"
+                :tabindex="optionsHidden ? 0 : -1">
+          <i class="fa fa-cog" aria-hidden="true"></i>
+        </button>
+        <button class="control-button"
+                @click="flood(n - 1)"
+                v-for="n in nColors"
+                :style="{backgroundColor: colorScheme[n - 1]}"
+                :tabindex="optionsHidden ? 0 : -1"
+                :aria-label="'flood color ' + n">
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -109,27 +127,29 @@
 <script type="text/javascript">
 Vue.component('modal', {
     template: `<transition name="modal">
-                <div class="modal-mask">
-                  <div class="modal-wrapper">
-                    <div class="modal-container">
-                      <div class="modal-header">
-                        <slot name="header">
-                        </slot>
-                      </div>
+                <div class="modal-mask"
+                     @keydown.esc="$emit('close')">
+                  <div class="modal-container">
+                    <div class="modal-header">
+                      <slot name="header">
+                      </slot>
+                      <button
+                          aria-label="close"
+                          class="modal-default-button" 
+                          @click="$emit('close')">
+                          &times;
+                      </button>
+                    </div>
 
-                      <div class="modal-body">
-                        <slot name="body">
-                        </slot>
-                      </div>
+                    <div class="modal-body">
+                      <slot name="body">
+                      </slot>
+                    </div>
 
-                      <div class="modal-footer">
-                        <slot name="footer">
-                        <button
-                            class="modal-default-button" 
-                            @click="$emit('close')">Close</button>
-                        </slot>
+                    <div class="modal-footer">
+                      <slot name="footer">
+                      </slot>
 
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -161,7 +181,7 @@ Vue.component('flood-tile', {
                     :style="{backgroundColor: colorScheme[color]}">
                 </div>`,
     computed: {
-        color: function() { return this.tile.color }
+        color: function () { return this.tile.color }
     }
 });
 
@@ -182,19 +202,19 @@ var app = new Vue({
     },
     boardSizeOptions: {
         type: Array,
-        default: function() {
+        default: function () {
             return [8, 12, 18, 24];
         }
     },
     nColorsOptions: {
         type: Array,
-        default: function() {
+        default: function () {
             return [3, 4, 5];
         }
     },
     colorSchemeOptions: {
         type: Array,
-        default: function() {
+        default: function () {
             return [['#FF6C00', '#FFA500', '#1047A9', '#009E8E', '#6A0C62'],
                     ['#D60061', '#FF5C00', '#8BEA00', '#00A779', '#3D281D'],
                     ['#206176', '#BD882E', '#654308', '#BD602E', '#652908'],
@@ -216,50 +236,62 @@ var app = new Vue({
   },
 
   computed: {
-    colorScheme: function() {
-        return this.colorSchemeOptions[this.colorSchemeIndex];
+    colorScheme: function () {
+        return this.colorSchemeOptions[this.colorSchemeIndex]
     },
-    nColors: function() {
-        return this.nColorsOptions[this.nColorsIndex];
+    nColors: function () {
+        return this.nColorsOptions[this.nColorsIndex]
     },
-    boardSize: function() {
-        return this.boardSizeOptions[this.boardSizeIndex];
+    boardSize: function () {
+        return this.boardSizeOptions[this.boardSizeIndex]
     },
-    isGameOver: function() {
-        return this.board.isFlooded() || (this.moveCounter >= this.moveLimit);
+    isGameOver: function () {
+        return this.board.isFlooded() || (this.moveCounter >= this.moveLimit)
     },
-    isGameWon: function() {
-        return this.board.isFlooded() && (this.moveCounter <= this.moveLimit);
+    isGameWon: function () {
+        return this.board.isFlooded() && (this.moveCounter <= this.moveLimit)
     },
-    moveLimit: function() {
-        return maxAllowedMoves(this.nColors, this.boardSize);
+    moveLimit: function () {
+        return maxAllowedMoves(this.nColors, this.boardSize)
+    },
+    modalIsOpen: function () {
+        return this.isGameOver || !this.optionsHidden
     }
   },
 
   methods: {
-    flood: function(color) {
+    flood: function (color) {
         if (this.board.board[0][0].color !== color && !this.isGameOver) {
-            this.board.flood(color);
-            this.moveCounter += 1;
+            this.board.flood(color)
+            this.moveCounter += 1
         }
     },
 
-    restartGame: function() {
-        this.moveCounter = 0;
-        this.board = new Board(this.nColors, this.boardSize);
+    restartGame: function () {
+        this.moveCounter = 0
+        this.board = new Board(this.nColors, this.boardSize)
     },
 
-    toggleOptions: function(event) {
-        this.optionsHidden = !this.optionsHidden;
+    toggleOptions: function (event) {
+        this.optionsHidden = !this.optionsHidden
     }
   },
 
   watch: {
-    nColors: function(nColors) {
-        this.restartGame();
+    nColors: function (nColors) {
+        this.restartGame()
     },
-    boardSize: function(boardSize) {
-        this.restartGame();
+    boardSize: function (boardSize) {
+        this.restartGame()
+    },
+    modalIsOpen: function (isOpen) {
+        if (isOpen) {
+          document.body.style.overflow = 'hidden'
+        }
+        else {
+          document.body.style.overflow = 'auto'
+        }
+
     }
   }
 })

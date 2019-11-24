@@ -5,20 +5,28 @@
 @import 'variables';
 
 * {
-    @include transition($transition-speed-default);
+    @include transition($speed-transition-default);
 }
 
 html, body {
-    font-family: $text-font-stack;
+    font-family: $font-stack-text;
+    font-size: $font-size-default;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: $header-font-stack;
+    font-family: $font-stack-header;
+}
+
+button {
+    &:hover,
+    &:focus,
+    &:active {
+        @include scale-shadow($scale-default);
+    }
 }
 
 fieldset {
     border: none;
-    margin: 10px;
 }
 
 .board {
@@ -39,27 +47,20 @@ fieldset {
 .control-button {
     border-radius: 50%;
     border: 1px solid grey;
-    vertical-align: top;
+    font-size: $font-size-small;
+    height: 30px;
+    width: 30px;
 
     @include respond-to('min-small') {
-        height: 35px;
-        margin: 3px;
-        width: 35px;
+        font-size: $font-size-default;
+        height: 40px;
+        width: 40px;
     }
 
     @include respond-to('min-medium') {
-        font-size: 1.5rem;
-        height: 50px;
-        margin: 5px;
-        width: 50px;
-    }
-
-    &:hover,
-    &:focus,
-    &:active {
-        @include transform(scale(1.2));
-        @include box-shadow(2px, 2px, 5px, 0, grey);
-        outline: none;
+        font-size: $font-size-large;
+        height: 60px;
+        width: 60px;
     }
 }
 
@@ -70,27 +71,28 @@ fieldset {
     vertical-align: baseline;
 
     @include respond-to('min-small') {
-        font-size: 1.5rem;
+        font-size: 1.5*$font-size-default;
     }
 
     @include respond-to('min-medium') {
-        font-size: 1.75rem;
+        font-size: 1.75*$font-size-default;
     }
 }
 
-.flex {
-    display: flex;
+.full-width {
+    width: 100%;
 }
 
 .header {
     margin: 0;
+    font-size: $font-size-default;
 
     @include respond-to('min-small') {
-        font-size: 1.5rem;
+        font-size: 1.5*$font-size-default;
     }
 
     @include respond-to('min-medium') {
-        font-size: 2.5rem;
+        font-size: 2.5*$font-size-default;
     }
 }
 
@@ -100,38 +102,80 @@ fieldset {
     align-items: flex-end;
 }
 
+.instructions {
+    color: #555555;
+    font-size: $font-size-tiny;
+
+    @include respond-to('min-small') {
+        font-size: $font-size-small;
+    }
+
+    @include respond-to('min-medium') {
+        font-size: $font-size-default;
+    }
+}
+
 .options {
+    font-size: $font-size-default;
     margin-top: 1.25rem;
     text-align: left;
-    font-size: 14pt;
+
+    fieldset {
+        margin-bottom: 30px;
+        padding: 0;
+    }
 
     input[type="radio"] {
-        display: none;
+        height: 0;
+        width: 0;
+        opacity: 0;
 
         &:checked + label {
-            border: 1px solid #aaaaaa;
-            @include transition(0.25s ease);
+            background-color: white;
+            border: 1px solid #888888;
+            color: black;
+            opacity: 1;
+            @include transition($speed-transition-default ease);
         }
 
         & + label {
-            margin: 1px;
-            padding: 3px 8px;
+            border-radius: 50px;
+            font-family: $font-stack-monospace;
+            font-size: 1.25*$font-size-medium;
+            opacity: 0.5;
+            padding: 0.25rem 0.8rem;
         }
+
+        &:hover + label,
+        &:focus + label,
+        &:active + label {
+            @include scale-shadow(1.05);
+            border: 1px solid #888888;
+            opacity: 1;
+        }
+    }
+
+    legend {
+        color: #555555;
+        font-family: $font-stack-text;
+        font-size: $font-size-large;
+        font-weight: bold;
+        margin-bottom: 15px;
     }
 }
 
 .scheme {
+    align-content: space-between;
     display: flex;
-    justify-content: space-between;
-    width: 100%;
 }
 
 .scheme-tile {
+    border: 1px solid #888888;
     border-radius: 50%;
     display: inline-block;
-    height: 40px;
-    margin: 2px;
-    width: 40px;
+    height: 30px;
+    margin: 8px 0;
+    width: 30px;
 }
 
 .select {
@@ -144,7 +188,6 @@ fieldset {
     justify-self: end;
     margin: 0 20px;
     text-align: right;
-    color: #555555;
 }
 
 .side-right {
@@ -163,7 +206,7 @@ fieldset {
 .side-bottom {
     align-self: start;
     grid-area: 5 / 2 / 6 / 5;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .tile {
@@ -177,9 +220,10 @@ fieldset {
     grid-row-gap: 0px;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
+    height: map-get($breakpoints, 'small');
     margin: 0 auto;
     text-align: center;
-    width: max-content;
+    width: map-get($breakpoints, 'small');
 
     @include respond-to('min-small') {
         height: 550px;
@@ -199,47 +243,52 @@ fieldset {
 
 .modal-mask {
   background-color: rgba(0, 0, 0, .5);
-  display: table;
-  height: 100%;
-  left: 0;
   position: fixed;
   top: 0;
-  transition: opacity .3s ease;
+  left: 0;
   width: 100%;
-  z-index: 9998;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+  height: 100%;
+  overflow: auto;
+  z-index: 2;
 }
 
 .modal-container {
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  font-family: Helvetica, Arial, sans-serif;
   margin: 0px auto;
-  padding: 20px 30px;
+  overflow: auto;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  padding-left: 30px;
   transition: all .3s ease;
-  width: 300px;
+  max-width: 400px;
 }
 
 .modal-header h2 {
-  margin-top: 0;
+  margin: auto 0;
 }
 
 .modal-body {
   margin: 20px 0;
 }
 
-.modal-footer {
-    text-align: right;
+.modal-header {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .modal-default-button {
-  background-color: white;
-  padding: 6px 8px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid grey;
+  border-radius: 50%;
+  font-size: 18pt;
+  height: 1.4em;
+  width: 1.4em;
+  margin: 0;
 }
 
 /*
@@ -263,6 +312,6 @@ fieldset {
 .modal-container {
     .modal-enter-active,
     .modal-leave-active {
-        @include transition(0.5s ease);
+        @include transition($speed-transition-default ease);
     }
 }
