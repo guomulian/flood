@@ -356,18 +356,19 @@ fieldset {
   font-size: 14pt;
   height: 60px;
   width: 60px;
-  margin: 15px; }
+  margin: 5px; }
   @media (min-width: 320px) {
     .control-button {
-      font-size: 18pt;
+      font-size: 22.5pt;
       height: 80px;
       width: 80px;
-      margin: 5px; } }
+      margin: 10px; } }
   @media (min-width: 768px) {
     .control-button {
       font-size: 14pt;
       height: 40px;
-      width: 40px; } }
+      width: 40px;
+      margin: 5px; } }
 
 .counter {
   margin: 0;
