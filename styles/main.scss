@@ -62,19 +62,20 @@ fieldset {
     font-size: $font-size-default;
     height: 60px;
     width: 60px;
-    margin: 15px;
+    margin: 5px;
 
     @include respond-to('min-small') {
-        font-size: $font-size-large;
+        font-size: 1.25*$font-size-large;
         height: 80px;
         width: 80px;
-        margin: 5px;
+        margin: 10px;
     }
 
     @include respond-to('min-medium') {
         font-size: $font-size-default;
         height: 40px;
         width: 40px;
+        margin: 5px;
     }
 }
 
